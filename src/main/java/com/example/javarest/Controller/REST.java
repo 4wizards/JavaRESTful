@@ -1,14 +1,17 @@
 package com.example.javarest.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.javarest.Models.Message;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/api")
 public class REST {
-    @RequestMapping("/")
-    public String index() {
-        return "Hejsansvejsan";
 
+    @CrossOrigin
+    @PostMapping("/addvalue")
+    public Message Post(@RequestBody Message message){
+        System.out.println(message.getTemp());
+        return message;
     }
 }
