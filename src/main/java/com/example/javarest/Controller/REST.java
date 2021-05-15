@@ -12,6 +12,7 @@ public class REST {
     @PostMapping("/addvalue")
     public Message Post(@RequestBody Message message){
         System.out.println(message.getTemp());
-        return message;
+        Message newMessage = new Message("hej!", "va duktiga ni är");
+        return  newMessage;
     }
 }
