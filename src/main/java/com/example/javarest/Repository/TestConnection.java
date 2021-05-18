@@ -1,10 +1,13 @@
 package com.example.javarest.Repository;
 
+import com.example.javarest.Models.Measurement;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestConnection {
+
 
     public TestConnection () throws SQLException {
         Connection con = SQLConnector.GetConnected();
@@ -26,10 +29,27 @@ public class TestConnection {
         }
     }
 
-  /*  public List<Integer> Testa{
-        List lista = new ArrayList();
 
-    }*/
+
+    public void AddMeasurement(Measurement measurement){
+
+        Connection con = SQLConnector.GetConnected();
+        String query ="INSERT INTO measurement VALUES(?,?,?,?,?)";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, measurement.getDeviceId());
+            statement.setInt(2, measurement.getLocationId());
+            statement.setString(3, measurement.getMeasurementTime());
+            statement.setDouble(4, measurement.getTemperature());
+            statement.setDouble(5, measurement.getHumidity());
+            statement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
 }
 
 
