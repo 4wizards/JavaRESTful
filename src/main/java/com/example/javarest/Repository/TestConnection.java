@@ -52,6 +52,22 @@ public class TestConnection {
 
 }
 
+/* TEST getValues
+BEGIN
+    DECLARE @deviceId varchar(100);
+    DECLARE @measurementTime varchar (100);
+    DECLARE @temperature varchar (100);
+    DECLARE @humidity varchar (100);
+    SET @measurementTime = ?;
+    SET @temperature = ?;
+    SET @humidity = ?;
+    SELECT @measurementTime, @temperature, @humidity FROM measurement
+END
+state = setString(1, measurementTime.getMeasurementTime);
+state = setString(2, temperature.getTemperature);
+state = setString(3, humidity.getHumidity);
+
+*/
 
 /*
 BEGIN
