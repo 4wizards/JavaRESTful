@@ -1,27 +1,27 @@
 package com.example.javarest.Models;
 
 public class Location {
-    float longitude;
-    float latitude;
+    String longitude;
+    String latitude;
 
-    public Location(float longitude, float latitude) {
+    public Location(String longitude, String latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 }
