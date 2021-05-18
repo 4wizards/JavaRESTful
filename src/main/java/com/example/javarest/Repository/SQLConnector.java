@@ -10,8 +10,11 @@ public class SQLConnector {
 
     SQLConnector(){
         Property p = new Property();
+
+
+
         try {
-            conny = DriverManager.getConnection(p.getConnectionString(), p.getUserName(), p.getPassword());
+            conny = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
