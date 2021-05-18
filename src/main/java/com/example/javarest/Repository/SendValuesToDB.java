@@ -3,6 +3,7 @@ package com.example.javarest.Repository;
 import com.example.javarest.Models.Device;
 import com.example.javarest.Models.Location;
 import com.example.javarest.Models.Measurement;
+import com.example.javarest.Models.Message;
 
 import java.sql.*;
 
@@ -11,6 +12,12 @@ public class SendValuesToDB {
 
     int locationId;
     int deviceId;
+
+    public SendValuesToDB(Message payload) {
+        Location(payload.getLocation());
+        Device(payload.getDevice());
+        Measurements(payload.getMeasurement());
+    }
 
     public void Location(Location location){
         String query = "BEGIN\n" +
@@ -65,7 +72,7 @@ public class SendValuesToDB {
         }
     }
 
-    public void Measurments(Measurement measurement){
+    public void Measurements(Measurement measurement){
         String query = "INSERT INTO Measurement VALUES(?,?,?,?,?)";
         try {
             PreparedStatement statement = this.con.prepareStatement(query);

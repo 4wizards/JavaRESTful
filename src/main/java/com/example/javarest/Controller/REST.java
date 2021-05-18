@@ -1,6 +1,7 @@
 package com.example.javarest.Controller;
 
 import com.example.javarest.Models.Message;
+import com.example.javarest.Repository.SendValuesToDB;
 import com.example.javarest.Repository.TestConnection;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +16,12 @@ public class REST {
 
     List<Integer> messages = new ArrayList<>();
 
-    /*
+
     @CrossOrigin
     @PostMapping("/postvalue")
-    public void Post(@RequestBody Message message){
-        messages.add(message);
-    }*/
+    public void Post(@RequestBody Message payload){
+        new SendValuesToDB(payload);
+    }
 
     @GetMapping("/getvalues")
     public void getmessages() throws SQLException {
