@@ -17,6 +17,7 @@ public class REST {
     @PostMapping("/postvalue")
     public void Post(@RequestBody Message message){
         //hejhej
+        //hejhej
         messages.add(message);
     }
 
