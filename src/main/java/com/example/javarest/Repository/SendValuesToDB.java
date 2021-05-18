@@ -14,9 +14,9 @@ public class SendValuesToDB {
     int deviceId;
 
     public SendValuesToDB(Message payload) {
-        Location(payload.getLocation());
         Device(payload.getDevice());
-        Measurements(payload.getMeasurement());
+        //Location(payload.getLocation());
+        //Measurements(payload.getMeasurement());
     }
 
     public void Location(Location location){
