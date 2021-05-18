@@ -16,6 +16,7 @@ public class REST {
     @CrossOrigin
     @PostMapping("/postvalue")
     public void Post(@RequestBody Message message){
+        //hejhej
         messages.add(message);
     }
 
