@@ -13,7 +13,7 @@ public class Property {
     public Property(){
         Properties p = new java.util.Properties();
         try{
-            p.load(new FileInputStream("src/main/resources/application.properties"));
+            p.load(new FileInputStream("src/main/java/resources/application.properties"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
