@@ -1,28 +1,38 @@
 package com.example.javarest.Models;
 
+
 public class Message {
-    private String temp;
-    private String hum;
+    Device device;
+    Measurement measurement;
+    Location location;
 
-
-    public Message(String temp, String hum){
-        setTemp(temp);
-        setHum(hum);
+    public Message(Device device, Location location, Measurement measurement) {
+        this.device = device;
+        this.measurement = measurement;
+        this.location = location;
     }
 
-    public String getTemp() {
-        return temp;
+    public Device getDevice() {
+        return device;
     }
 
-    public void setTemp(String temp) {
-        this.temp = temp;
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
-    public String getHum() {
-        return hum;
+    public Measurement getMeasurement() {
+        return measurement;
     }
 
-    public void setHum(String hum) {
-        this.hum = hum;
+    public void setMeasurement(Measurement measurement) {
+        this.measurement = measurement;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
