@@ -5,6 +5,7 @@ public class Measurement {
     double temperature;
     double humidity;
 
+
     public Measurement(String measurementTime, double temperature, double humidity) {
         this.measurementTime = measurementTime;
         this.temperature = temperature;
