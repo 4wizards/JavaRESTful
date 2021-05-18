@@ -20,20 +20,15 @@ public class SendValuesToDB {
     }
 
     public void Location(Location location){
-        String query = "BEGIN\n" +
-                "    DECLARE @longitude varchar(100);\n" +
-                "    DECLARE @latitude varchar(100);\n" +
-                "    SET @longitude = ?;\n" +
-                "    SET @latitude = ?;\n" +
-                "    IF NOT EXISTS (SELECT locationId FROM Location WHERE Longitude = @longitude AND Latitude = @latitude)\n" +
-                "    BEGIN\n" +
-                "        INSERT INTO Location(Longitude, Latitude) VALUES (@longitude, @latitude)\n" +
-                "    END\n" +
-                "END";
+        String query = "IF NOT EXISTS " +
+                "(SELECT locationId FROM Location WHERE Longitude = ? AND Latitude = ?)\n" +
+                "    ELSE INSERT INTO Location(Longitude, Latitude) VALUES (?, ?)";
         try {
             PreparedStatement statement = this.con.prepareStatement(query);
             statement.setString(1, location.getLongitude());
             statement.setString(2, location.getLatitude());
+            statement.setString(3, location.getLongitude());
+            statement.setString(4, location.getLatitude());
             ResultSet result = statement.executeQuery();
             while(result.next()){
                 System.out.println("location id: " + result.getInt(1));
@@ -45,18 +40,15 @@ public class SendValuesToDB {
     }
 
     public void Device(Device device){
-        String query = "BEGIN\n" +
-                "    DECLARE @devicename varchar(100);\n" +
-                "    DECLARE @mcuType varchar(100);\n" +
-                "    DECLARE @sensor varchar(100);\n" +
-                "    SET @devicename = ?;\n" +
-                "    SET @mcuType = ?;\n" +
-                "    SET @sensor = ?;\n" +
-                "    IF NOT EXISTS (SELECT deviceId FROM Device WHERE deviceName = @deviceName)\n" +
-                "    BEGIN\n" +
-                "        INSERT INTO Device(devicename, mcuType, sensor) VALUES (@devicename, @mcuType, @sensor)\n" +
-                "    END\n" +
-                "END";
+        //String query = "IF NOT EXISTS (SELECT deviceId FROM Device WHERE deviceName = ?) INSERT INTO Device(devicename, mcuType, sensor) VALUES (?, ?, ?)";
+        String query = "insert ignore into device(deviceName, mcuType, sensor)\n" +
+                "value(?,?,?);\n" +
+                "select\n" +
+                "    deviceId\n" +
+                "from\n" +
+                "    device\n" +
+                "where\n" +
+                "    deviceName = ?;";
         try {
             PreparedStatement statement = this.con.prepareStatement(query);
             statement.setString(1, device.getDeviceName());
