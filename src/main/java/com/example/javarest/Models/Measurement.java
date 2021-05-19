@@ -1,22 +1,22 @@
 package com.example.javarest.Models;
 
 public class Measurement {
-    String measurementTime;
+    long measurementTime;
     double temperature;
     double humidity;
 
 
-    public Measurement(String measurementTime, double temperature, double humidity) {
+    public Measurement(long measurementTime, double temperature, double humidity) {
         this.measurementTime = measurementTime;
         this.temperature = temperature;
         this.humidity = humidity;
     }
 
-    public String getMeasurementTime() {
+    public long getMeasurementTime() {
         return measurementTime;
     }
 
-    public void setMeasurementTime(String measurementTime) {
+    public void setMeasurementTime(long measurementTime) {
         this.measurementTime = measurementTime;
     }
 

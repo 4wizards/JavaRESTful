@@ -1,6 +1,8 @@
 package com.example.javarest.Controller;
 
+import com.example.javarest.Models.Measurement;
 import com.example.javarest.Models.Message;
+import com.example.javarest.Repository.GetValuesFromDB;
 import com.example.javarest.Repository.SendValuesToDB;
 import com.example.javarest.Repository.TestConnection;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +26,9 @@ public class REST {
     }
 
     @GetMapping("/getvalues")
-    public void getmessages() throws SQLException {
-        TestConnection test = new TestConnection();
-
+    public List<Measurement> getmessages() throws SQLException {
+       GetValuesFromDB values = new GetValuesFromDB();
+        return values.getMeasurementValues();
         //return messages;
     }
 

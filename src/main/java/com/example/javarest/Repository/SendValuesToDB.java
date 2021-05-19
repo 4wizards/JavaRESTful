@@ -89,7 +89,7 @@ public class SendValuesToDB {
             statement.setInt(1, this.deviceId);
             statement.setInt(2, this.locationId);
 
-            statement.setString(3, measurement.getMeasurementTime());
+            statement.setLong(3, measurement.getMeasurementTime());
             statement.setDouble(4, measurement.getTemperature());
             statement.setDouble(5, measurement.getHumidity());
             statement.executeUpdate();
