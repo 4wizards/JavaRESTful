@@ -42,7 +42,7 @@ public class TestConnection {
             PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, 1);
             statement.setInt(2, 1);
-            statement.setString(3, measurement.getMeasurementTime());
+            statement.setLong(3, measurement.getMeasurementTime());
             statement.setDouble(4, measurement.getTemperature());
             statement.setDouble(5, measurement.getHumidity());
             statement.executeUpdate();
