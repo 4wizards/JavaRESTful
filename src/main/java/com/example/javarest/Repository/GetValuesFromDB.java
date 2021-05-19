@@ -64,7 +64,9 @@ public class GetValuesFromDB {
                 "device.deviceName " +
                 "FROM heroku_ce7cafd7b067d97.measurement\n" +
                 "JOIN device ON measurement.deviceId=device.deviceId\n" +
-                "JOIN location ON measurement.locationId=location.locationId";
+                "JOIN location ON measurement.locationId=location.locationId\n"+
+                "order by measurementTime DESC LIMIT 10"
+                ;
         try {
             PreparedStatement statement = this.con.prepareStatement(query1);
             ResultSet result = statement.executeQuery(query1);
