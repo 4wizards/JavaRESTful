@@ -13,7 +13,7 @@ public class Property {
     public Property(){
         Properties p = new java.util.Properties();
         try{
-            p.load(new FileInputStream("src/main/java/resources/application.properties"));
+            p.load(new FileInputStream("src/main/resources/application.properties"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -22,6 +22,11 @@ public class Property {
         this.setUserName(p.getProperty("USERNAME"));
         this.setPassword(p.getProperty("PASSWORD"));
         this.setConnectionString(p.getProperty("MYSQLDB"));
+        System.out.println(this.userName);
+
+        System.setProperty("MYSQLDB", this.connectionString);
+        System.setProperty("USERNAME", this.userName);
+        System.setProperty("PASSWORD", this.password);
     }
 
     public static String getUserName() {
