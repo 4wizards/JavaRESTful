@@ -26,6 +26,7 @@ public class REST {
         new SendValuesToDB(payload);
     }
 
+    @CrossOrigin
     @GetMapping("/getvalues")
     //public List<Measurement> getmessages() throws SQLException {
     public List<JoinedData> getmessages() throws SQLException {
@@ -33,7 +34,7 @@ public class REST {
         return values.getJoinedValues();
         //return messages;
     }
-
+    @CrossOrigin
     @GetMapping("/getvalues/{limit}")
     public void getmessages(@PathVariable String limit) throws SQLException {
         System.out.println(limit);
