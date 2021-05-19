@@ -1,9 +1,6 @@
 package com.example.javarest.Repository;
 
-import com.example.javarest.Models.Device;
-import com.example.javarest.Models.Location;
-import com.example.javarest.Models.Measurement;
-import com.example.javarest.Models.Message;
+import com.example.javarest.Models.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +26,9 @@ public class GetValuesFromDB {
         List<Measurement> measurementList = new ArrayList<>();
 
         String query = "select measurementTime, temperature, humidity from measurement";
-        String query1 = "";
+        String query1 = "SELECT measurement.measurementTime, measurement.temperature, measurement.humidity, location.locationName, device.deviceName FROM heroku_ce7cafd7b067d97.measurement\n" +
+                "JOIN device ON measurement.deviceId=device.deviceId\n" +
+                "JOIN location ON measurement.locationId=location.locationId";
         try {
             PreparedStatement statement = this.con.prepareStatement(query);
             ResultSet result = statement.executeQuery(query);
@@ -52,4 +51,45 @@ public class GetValuesFromDB {
 
         return null;
     }
+
+    public List<JoinedData> getJoinedValues(){
+        List<JoinedData> joinedData = new ArrayList<>();
+
+        String query = "select measurementTime, temperature, humidity from measurement";
+        String query1 = "SELECT " +
+                "measurement.measurementTime, " +
+                "measurement.temperature, " +
+                "measurement.humidity, " +
+                "location.locationName, " +
+                "device.deviceName " +
+                "FROM heroku_ce7cafd7b067d97.measurement\n" +
+                "JOIN device ON measurement.deviceId=device.deviceId\n" +
+                "JOIN location ON measurement.locationId=location.locationId";
+        try {
+            PreparedStatement statement = this.con.prepareStatement(query1);
+            ResultSet result = statement.executeQuery(query1);
+
+            while(result.next()){
+                joinedData.add(new JoinedData(
+                        result.getLong("measurementTime"),
+                        result.getDouble("temperature"),
+                        result.getDouble("humidity"),
+                        result.getString("locationName"),
+                        result.getString("deviceName")
+
+                ));
+
+            }
+            for (JoinedData dataItem : joinedData){
+                System.out.println(dataItem.getTemperature() + " " + dataItem.getDeviceName());
+            }
+
+            return joinedData;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
 }
+

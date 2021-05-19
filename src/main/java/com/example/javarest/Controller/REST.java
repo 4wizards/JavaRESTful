@@ -1,5 +1,6 @@
 package com.example.javarest.Controller;
 
+import com.example.javarest.Models.JoinedData;
 import com.example.javarest.Models.Measurement;
 import com.example.javarest.Models.Message;
 import com.example.javarest.Repository.GetValuesFromDB;
@@ -26,9 +27,10 @@ public class REST {
     }
 
     @GetMapping("/getvalues")
-    public List<Measurement> getmessages() throws SQLException {
-       GetValuesFromDB values = new GetValuesFromDB();
-        return values.getMeasurementValues();
+    //public List<Measurement> getmessages() throws SQLException {
+    public List<JoinedData> getmessages() throws SQLException {
+        GetValuesFromDB values = new GetValuesFromDB();
+        return values.getJoinedValues();
         //return messages;
     }
 
