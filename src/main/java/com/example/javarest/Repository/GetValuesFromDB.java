@@ -36,19 +36,15 @@ public class GetValuesFromDB {
             while(result.next()){
                 measurementList.add(new Measurement(result.getLong("measurementTime"),
                         result.getDouble("temperature"), result.getDouble("humidity")));
-
             }
             for (Measurement dataItem : measurementList){
                 System.out.println(dataItem.getTemperature());
             }
-
-
             return measurementList;
             //return measurementList;
     } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return null;
     }
 
@@ -78,19 +74,15 @@ public class GetValuesFromDB {
                         result.getDouble("humidity"),
                         result.getString("locationName"),
                         result.getString("deviceName")
-
                 ));
-
             }
             for (JoinedData dataItem : joinedData){
                 System.out.println(dataItem.getTemperature() + " " + dataItem.getDeviceName());
             }
-
             return joinedData;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return null;
     }
 }
