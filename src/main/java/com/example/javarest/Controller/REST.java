@@ -6,6 +6,7 @@ import com.example.javarest.Models.Message;
 import com.example.javarest.Repository.GetValuesFromDB;
 import com.example.javarest.Repository.SendValuesToDB;
 import com.example.javarest.Repository.TestConnection;
+import com.mysql.cj.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -43,5 +44,16 @@ public class REST {
         //return messages;
     }
 
+    @CrossOrigin
+    @GetMapping("/getvalues/test/{limit}")
+    public List<JoinedData> listLimiterFunc(@PathVariable String limit)
+    {
+        GetValuesFromDB values = new GetValuesFromDB();
+        if(StringUtils.isStrictlyNumeric(limit)){
+            System.out.println("print list limited to "+limit);
+            return values.GetLimitedValuesFromDB(limit);
+        }
+        else return values.getJoinedValues();
 
+    }
 }
