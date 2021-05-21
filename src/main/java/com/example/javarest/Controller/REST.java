@@ -35,7 +35,8 @@ public class REST {
         return values.getJoinedValues();
         //return messages;
     }
-    @CrossOrigin
+
+    /*@CrossOrigin
     @GetMapping("/getvalues/{limit}")
     public void getmessages(@PathVariable String limit) throws SQLException {
         System.out.println(limit);
@@ -43,9 +44,10 @@ public class REST {
 
         //return messages;
     }
+    */
 
     @CrossOrigin
-    @GetMapping("/getvalues/test/{limit}")
+    @GetMapping("/getvalues/{limit}")
     public List<JoinedData> listLimiterFunc(@PathVariable String limit)
     {
         GetValuesFromDB values = new GetValuesFromDB();
