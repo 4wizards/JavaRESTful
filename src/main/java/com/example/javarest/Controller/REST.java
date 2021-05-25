@@ -1,14 +1,13 @@
 package com.example.javarest.Controller;
 
-import com.example.javarest.Models.JoinedData;
+import com.example.javarest.Models.CombinedData;
 import com.example.javarest.Models.Message;
 import com.example.javarest.Repository.GetValuesFromDB;
 import com.example.javarest.Repository.SendValuesToDB;
-import com.mysql.cj.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,22 +21,10 @@ public class REST {
     }
 
     @CrossOrigin
-    @GetMapping("/getvalues")
-    public List<JoinedData> getmessages() throws SQLException {
-        GetValuesFromDB values = new GetValuesFromDB();
-        return values.getJoinedValues();
-    }
-
-    @CrossOrigin
-    @GetMapping("/getvalues/{limit}")
-    public List<JoinedData> listLimiterFunc(@PathVariable String limit)
+    @GetMapping(path = {"/getvalues","/getvalues/{limit}"})
+    public List<CombinedData> listLimiterFunc(@PathVariable("limit") Optional<String> limit)
     {
         GetValuesFromDB values = new GetValuesFromDB();
-        if(StringUtils.isStrictlyNumeric(limit)){
-            System.out.println("print list limited to "+limit);
-            return values.GetLimitedValuesFromDB(limit);
-        }
-        else return values.getJoinedValues();
-
+        return values.GetLimitedValuesFromDB(limit);
     }
 }
