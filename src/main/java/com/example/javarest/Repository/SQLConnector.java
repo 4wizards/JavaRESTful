@@ -6,22 +6,18 @@ import java.sql.SQLException;
 
 
 public class SQLConnector {
-    static Connection conny;
+    static Connection con;
 
     SQLConnector(){
-        Property p = new Property();
-
-
-
         try {
-            conny = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            con = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public static Connection GetConnected(){
         new SQLConnector();
-        return conny;
+        return con;
     }
 }

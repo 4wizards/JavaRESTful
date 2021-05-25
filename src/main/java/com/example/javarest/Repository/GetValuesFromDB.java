@@ -1,9 +1,6 @@
 package com.example.javarest.Repository;
 
-import com.example.javarest.Models.Device;
-import com.example.javarest.Models.Location;
-import com.example.javarest.Models.Measurement;
-import com.example.javarest.Models.Message;
+import com.example.javarest.Models.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,45 +8,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GetValuesFromDB {
-    Measurement measurement;
     private Connection con = SQLConnector.GetConnected();
 
-    public GetValuesFromDB(){
-        //getMeasurementValues();
-    }
+    public List<CombinedData>GetLimitedValuesFromDB(Optional<String> limitNumber)
+    {
+        List<CombinedData> combinedData = new ArrayList<>();
 
+        String query = "SELECT " +
+                "measurement.measurementTime, " +
+                "measurement.temperature, " +
+                "measurement.humidity, " +
+                "location.locationName, " +
+                "device.deviceName " +
+                "FROM heroku_ce7cafd7b067d97.measurement\n" +
+                "JOIN device ON measurement.deviceId=device.deviceId\n" +
+                "JOIN location ON measurement.locationId=location.locationId\n"+
+                "order by measurementTime DESC"
+                 ;
+        if (limitNumber.isPresent())
+            query += " LIMIT "+limitNumber.get();
 
-
-
-
-
-    public List<Measurement> getMeasurementValues(){
-        List<Measurement> measurementList = new ArrayList<>();
-
-        String query = "select measurementTime, temperature, humidity from measurement";
-        String query1 = "";
         try {
             PreparedStatement statement = this.con.prepareStatement(query);
             ResultSet result = statement.executeQuery(query);
 
             while(result.next()){
-                measurementList.add(new Measurement(result.getLong("measurementTime"),
-                        result.getDouble("temperature"), result.getDouble("humidity")));
-
+                combinedData.add(new CombinedData(
+                        result.getLong("measurementTime"),
+                        result.getDouble("temperature"),
+                        result.getDouble("humidity"),
+                        result.getString("locationName"),
+                        result.getString("deviceName")
+                ));
             }
-            for (Measurement dataItem : measurementList){
-                System.out.println(dataItem.getTemperature());
-            }
 
-
-            return measurementList;
-            //return measurementList;
-    } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return combinedData;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
         return null;
     }
 }
+
