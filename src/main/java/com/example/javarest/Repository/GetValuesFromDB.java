@@ -26,8 +26,11 @@ public class GetValuesFromDB {
                 "FROM heroku_ce7cafd7b067d97.measurement\n" +
                 "JOIN device ON measurement.deviceId=device.deviceId\n" +
                 "JOIN location ON measurement.locationId=location.locationId\n"+
-                "order by measurementTime DESC LIMIT "+limitNumber
-                ;
+                "order by measurementTime DESC"
+                 ;
+        if (limitNumber.isPresent())
+            query += " LIMIT "+limitNumber.get();
+
         try {
             PreparedStatement statement = this.con.prepareStatement(query);
             ResultSet result = statement.executeQuery(query);

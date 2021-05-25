@@ -59,12 +59,11 @@ public class SendValuesToDB {
             statement.setString(1, device.getDeviceName());
             statement.setString(2, device.getMcuType());
             statement.setString(3, device.getSensor());
+            statement.executeUpdate();
 
-            rowChanged = statement.executeUpdate();
-
-
-                statement = this.con.prepareStatement(query1);
-                statement.setString(1, device.getDeviceName());
+            //next statement query
+            statement = this.con.prepareStatement(selectQuery);
+            statement.setString(1, device.getDeviceName());
 
             ResultSet result = statement.executeQuery();
             while(result.next()){
