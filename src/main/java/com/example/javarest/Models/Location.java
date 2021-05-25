@@ -5,7 +5,7 @@ public class Location {
     String latitude;
     String locationName;
 
-    public Location(String longitude, String latitude) {
+    public Location(String longitude, String latitude, String locationName) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.locationName = locationName;

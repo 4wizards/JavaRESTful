@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetValuesFromDB {
-    Measurement measurement;
     private Connection con = SQLConnector.GetConnected();
 
     public GetValuesFromDB(){
@@ -43,19 +42,16 @@ public class GetValuesFromDB {
                         result.getDouble("humidity"),
                         result.getString("locationName"),
                         result.getString("deviceName")
-
                 ));
-
             }
+
             for (JoinedData dataItem : joinedData){
                 System.out.println(dataItem.getTemperature() + " " + dataItem.getDeviceName());
             }
-
             return joinedData;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return null;
     }
 
@@ -73,19 +69,14 @@ public class GetValuesFromDB {
             while(result.next()){
                 measurementList.add(new Measurement(result.getLong("measurementTime"),
                         result.getDouble("temperature"), result.getDouble("humidity")));
-
             }
             for (Measurement dataItem : measurementList){
                 System.out.println(dataItem.getTemperature());
             }
-
-
             return measurementList;
-            //return measurementList;
     } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return null;
     }
 
@@ -102,7 +93,6 @@ public class GetValuesFromDB {
                 "FROM heroku_ce7cafd7b067d97.measurement\n" +
                 "JOIN device ON measurement.deviceId=device.deviceId\n" +
                 "JOIN location ON measurement.locationId=location.locationId\n"//+
-                //"order by measurementTime DESC LIMIT 10"
                 ;
         try {
             PreparedStatement statement = this.con.prepareStatement(query1);
@@ -115,19 +105,15 @@ public class GetValuesFromDB {
                         result.getDouble("humidity"),
                         result.getString("locationName"),
                         result.getString("deviceName")
-
                 ));
-
             }
             for (JoinedData dataItem : joinedData){
                 System.out.println(dataItem.getTemperature() + " " + dataItem.getDeviceName());
             }
-
             return joinedData;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return null;
     }
 }

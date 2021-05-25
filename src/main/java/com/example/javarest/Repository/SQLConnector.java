@@ -9,10 +9,7 @@ public class SQLConnector {
     static Connection conny;
 
     SQLConnector(){
-        Property p = new Property();
-
-
-
+        //Property p = new Property();
         try {
             //conny = DriverManager.getConnection(p.getConnectionString(),p.getUserName(), p.getPassword());
             conny = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));

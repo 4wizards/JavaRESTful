@@ -30,8 +30,6 @@ public class SendValuesToDB {
             statement.setString(2, location.getLongitude());
             statement.setString(3, location.getLatitude());
             rowChanged = statement.executeUpdate();
-            /*if (rowChanged == 1){  //en rad ändrades
-                System.out.println(rowChanged + " Location row added");*/
 
                 statement = this.con.prepareStatement(query1);
                 statement.setString(1, location.getLocationName());
@@ -42,7 +40,6 @@ public class SendValuesToDB {
                     this.locationId = result.getInt(1);
                 }
                 return true;
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -61,8 +58,7 @@ public class SendValuesToDB {
             statement.setString(3, device.getSensor());
 
             rowChanged = statement.executeUpdate();
-            /*if (rowChanged == 1){  //en rad ändrades
-                System.out.println(rowChanged+ " Device row added");*/
+
 
                 statement = this.con.prepareStatement(query1);
                 statement.setString(1, device.getDeviceName());
