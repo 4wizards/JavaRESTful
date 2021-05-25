@@ -1,13 +1,13 @@
 package com.example.javarest.Models;
 
-public class JoinedData {
+public class CombinedData {
     long measurementTime;
     double temperature;
     double humidity;
     String locationName;
     String deviceName;
 
-    public JoinedData(long measurementTime, double temperature, double humidity, String locationName, String deviceName) {
+    public CombinedData(long measurementTime, double temperature, double humidity, String locationName, String deviceName) {
         this.measurementTime = measurementTime;
         this.temperature = temperature;
         this.humidity = humidity;

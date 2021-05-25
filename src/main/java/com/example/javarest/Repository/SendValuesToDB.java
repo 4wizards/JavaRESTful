@@ -20,59 +20,62 @@ public class SendValuesToDB {
     }
 
     public boolean Location(Location location){
-        int rowChanged = 0;
-        String query = "insert ignore into location(locationName, longitude, latitude) value(?,?,?); ";
-        String query1 = "select locationId from location where locationName = ?;";
+
+        String insertQuery = "insert ignore into location(locationName, longitude, latitude) value(?,?,?); ";
+        String selectQuery = "select locationId from location where locationName = ?;";
         try {
-            PreparedStatement statement = this.con.prepareStatement(query);
+            PreparedStatement statement = this.con.prepareStatement(insertQuery);
 
             statement.setString(1, location.getLocationName());
             statement.setString(2, location.getLongitude());
             statement.setString(3, location.getLatitude());
-            rowChanged = statement.executeUpdate();
+            statement.executeUpdate();
 
-                statement = this.con.prepareStatement(query1);
-                statement.setString(1, location.getLocationName());
+            //next statement query
+            statement = this.con.prepareStatement(selectQuery);
+            statement.setString(1, location.getLocationName());
 
-                ResultSet result = statement.executeQuery();
-                while(result.next()){
-                    System.out.println("location id: " + result.getInt(1));
-                    this.locationId = result.getInt(1);
-                }
-                return true;
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+                //Uncomment to print to console
+                //System.out.println("location id: " + result.getInt(1));
+
+                this.locationId = result.getInt(1);
+            }
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
 
     public boolean Device(Device device){
-        int rowChanged = 0;
-        String query = "insert ignore into device(deviceName, mcuType, sensor) value(?,?,?);";
-        String query1 = "select deviceId from device where deviceName = ?;";
+        String insertQuery = "insert ignore into device(deviceName, mcuType, sensor) value(?,?,?);";
+        String selectQuery = "select deviceId from device where deviceName = ?;";
         try {
-            PreparedStatement statement = this.con.prepareStatement(query);
+            PreparedStatement statement = this.con.prepareStatement(insertQuery);
             statement.setString(1, device.getDeviceName());
             statement.setString(2, device.getMcuType());
             statement.setString(3, device.getSensor());
+            statement.executeUpdate();
 
-            rowChanged = statement.executeUpdate();
+            //next statement query
+            statement = this.con.prepareStatement(selectQuery);
+            statement.setString(1, device.getDeviceName());
 
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
 
-                statement = this.con.prepareStatement(query1);
-                statement.setString(1, device.getDeviceName());
+                //Uncomment to print to console
+                //System.out.println("device id: " + result.getInt(1));
 
-                ResultSet result = statement.executeQuery();
-                while(result.next()){
-                    System.out.println("device id: " + result.getInt(1));
-                    this.deviceId = result.getInt(1);
-                }
-                return true;
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+                this.deviceId = result.getInt(1);
+            }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
