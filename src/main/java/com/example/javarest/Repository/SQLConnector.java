@@ -10,11 +10,7 @@ public class SQLConnector {
 
     SQLConnector(){
         try {
-            //Uncomment to run in localhost
-            Property p = new Property();
-            con = DriverManager.getConnection(p.getConnectionString(),p.getUserName(), p.getPassword());
-
-            //con = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));
+            con = DriverManager.getConnection(System.getenv("MYSQLDB"),System.getenv("USERNAME"), System.getenv("PASSWORD"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
