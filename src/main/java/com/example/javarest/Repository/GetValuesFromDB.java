@@ -45,12 +45,6 @@ public class GetValuesFromDB {
                 ));
             }
 
-            /** Uncomment to print values in console **/
-            /*
-            for (CombinedData dataItem : combinedData){
-                System.out.println(dataItem.getTemperature() + " " + dataItem.getDeviceName());
-            }*/
-
             return combinedData;
         } catch (SQLException e) {
             e.printStackTrace();

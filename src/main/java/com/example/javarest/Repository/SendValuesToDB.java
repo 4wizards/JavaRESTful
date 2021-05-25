@@ -37,10 +37,6 @@ public class SendValuesToDB {
 
             ResultSet result = statement.executeQuery();
             while(result.next()){
-
-                //Uncomment to print to console
-                //System.out.println("location id: " + result.getInt(1));
-
                 this.locationId = result.getInt(1);
             }
             return true;
@@ -67,10 +63,6 @@ public class SendValuesToDB {
 
             ResultSet result = statement.executeQuery();
             while(result.next()){
-
-                //Uncomment to print to console
-                //System.out.println("device id: " + result.getInt(1));
-
                 this.deviceId = result.getInt(1);
             }
             return true;
